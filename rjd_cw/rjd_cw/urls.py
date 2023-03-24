@@ -19,6 +19,7 @@ from django.views.static import serve
 from django.conf import settings
 
 from app_cw.views import user, pretty, depart, admin, account, task, order, chart, upload, city
+from sky import views
 
 urlpatterns = [
     # path('admin/', admin.site.urls),
@@ -26,7 +27,7 @@ urlpatterns = [
     re_path(r'^media/(?P<path>.*)$', serve, {'document_root': settings.MEDIA_ROOT}, name='media'),
 
     # 定义静态资源的路由信息
-    re_path('static/(?P<path>.*)', serve, {'document_root': settings.STATIC_ROOT}, name='static'),
+    re_path(r'^static/(?P<path>.*)', serve, {'document_root': settings.STATIC_ROOT}, name='static'),
 
     # 部门管理
     path('depart/list/', depart.depart_list, ),
@@ -85,4 +86,8 @@ urlpatterns = [
     # 城市列表
     path('city/list/', city.city_list),
     path('city/add/', city.city_add),
+
+
+    # index
+    path('index/',views.index),
 ]

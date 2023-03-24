@@ -45,8 +45,8 @@ def upload_form(request):
         # print(form.cleaned_data)
         # 1.读取图片内容，写入到文件夹中并获取文件的路径
         image_object = form.cleaned_data.get("img")
-        # file_path = "app_cw/static/img/{}".format(image_object.name)
-        # db_file_path = os.path.join("static", "img", image_object.name)
+        # file_path = "app_cw/app_static/img/{}".format(image_object.name)
+        # db_file_path = os.path.join("app_static", "img", image_object.name)
         from django.conf import settings
         # media_path = os.path.join(settings.MEDIA_ROOT, image_object.name)# 绝对路径
         media_path = os.path.join("media", image_object.name)

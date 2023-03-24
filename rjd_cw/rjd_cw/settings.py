@@ -22,7 +22,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-ddc+fk^8mr==_4g*1ola!u7@kp_rj$w-!#)gk#=6k4*93r&xup'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
@@ -36,6 +36,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'app_cw',
+    'sky',
 ]
 
 MIDDLEWARE = [
@@ -118,7 +119,11 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 # 设置根目录的静态资源文件
-STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static'), os.path.join(BASE_DIR, 'app_cw/static')]
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'static'),
+    os.path.join(BASE_DIR, 'app_cw', 'app_static'),
+    os.path.join(BASE_DIR, 'sky', 'sky_static'),
+]
 # 当设置为线上模式时候，用于提供服务器的静态资源路径
 STATIC_ROOT = os.path.join(BASE_DIR, 'AllStatic')
 
