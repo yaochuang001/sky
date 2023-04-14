@@ -41,6 +41,7 @@ function bindBtnSaveEvent(){
 }
 
 function doAdd(){
+    console.log($("#formAdd").serialize());
     // 向后台发送请求
     $.ajax({
             url: "/order/add/",
@@ -49,10 +50,9 @@ function doAdd(){
             dataType:"JSON",
             success:function(res){
                 if(res.status){
-                    alert("创建成功");
+                    alert("创建成功111111");
                     // 清空表单
                     $("#formAdd")[0].reset();
-
                     //关闭对话框
                     $("#myModal").modal('hide');
 

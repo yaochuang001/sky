@@ -1,0 +1,93 @@
+{% extends 'sky_layout.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container">
+    <div class="panel panel-default">
+        <div class="panel-heading">当前产量</div>
+        <div class="panel-body">
+            <div id="m2" style="width:100%;height:400px;"></div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-8">
+            <div class="panel panel-default">
+                <div class="panel-heading">月度平均开机率</div>
+                <div class="panel-body">
+                    <div id="m1" style="width:100%;height:400px;"></div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <div class="panel panel-default">
+                <div class="panel-heading">当前开机状态</div>
+                <div class="panel-body">
+                    <div id="m3" style="width:100%;height:400px;"></div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <div class="bs-example" data-example-id="table-within-panel">
+        <div class="panel panel-default">
+            <!-- Default panel contents -->
+            <div class="panel-heading">
+                <span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
+                龙华设备信息列表
+            </div>
+            <!-- Table -->
+            <table class="table table-bordered">
+                <thead>
+                <tr>
+                    <th>设备名称</th>
+                    <th>设备状态</th>
+                    <th>SAP工单号</th>
+                    <th>产品名称</th>
+                    <th>创维编码</th>
+                    <th>取件方式</th>
+                    <th>工单数</th>
+                    <th>序列号</th>
+                    <th>当前周期</th>
+                    <th>当班完工数</th>
+                    <th>总完工数</th>
+                    <th>总误时</th>
+
+                </tr>
+                </thead>
+                <tbody>
+                {% for obj in queryset %}
+                <tr>
+                    <td>{{ obj.equipment_name }}</td>
+                    <td>{{ obj.equipment_status }}</td>
+                    <td>{{ obj.sap_number }}</td>
+                    <td>{{ obj.product_name }}</td>
+                    <td>{{ obj.sky_number }}</td>
+                    <td>{{ obj.pickup_method }}</td>
+                    <td>{{ obj.work_order }}</td>
+                    <td>{{ obj.serial_number }}</td>
+                    <td>{{ obj.work_cycle }}</td>
+                    <td>{{ obj.current_output }}</td>
+                    <td>{{ obj.total_output }}</td>
+                    <td>{{ obj.delay_worktime }}</td>
+
+                    <td>
+                        <a class="btn btn-primary btn-xs" href="#">详情</a>
+                    </td>
+                </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <ul class="pagination">
+            {{ page_string }}
+        </ul>
+
+    </div>
+
+</div>
+
+{% endblock %}
+
+{% block js %}
+<script src="{% static 'js/lh_chart.js' %}"></script>
+{% endblock %}

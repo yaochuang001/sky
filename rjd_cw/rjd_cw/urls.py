@@ -18,7 +18,7 @@ from django.urls import path, re_path, include
 from django.views.static import serve
 from django.conf import settings
 
-from app_cw.views import user, pretty, depart, admin, account, task, order, chart, upload, city
+from app_cw.views import user, pretty, depart, admin, account, task, order, chart, upload, city, yc
 
 urlpatterns = [
     # path('admin/', admin.site.urls),
@@ -88,4 +88,7 @@ urlpatterns = [
 
     # 指向skyApp应用的路由文件urls.py
     path('sky/', include(('sky.urls', 'sky'), namespace='sky')),
+
+    # 测试用
+    path('yc/test/', yc.yc_test),
 ]
