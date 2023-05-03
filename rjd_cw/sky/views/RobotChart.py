@@ -26,18 +26,18 @@ def robot_chart(request):
 def robot_char_bar(request):
     """构造柱状图产量数据"""
     day_output = data_date.get_week_data(9)  # 每天产量
-    plane_output = data_date.get_week_data(10)  # 计划产量
-    legend = ['产量', '计划产量']
+    plane_output = data_date.get_last_week_data(9) # 上周产量
+    legend = ['本周产量', '上周产量']
     series_list = [
         {
-            "name": '产量',
+            "name": '本周产量',
             "type": 'bar',
             "data": [day_output['星期一'], day_output['星期二'], day_output['星期三'],
                      day_output['星期四'], day_output['星期五'], day_output['星期六'],
                      day_output['星期天'], ]
         },
         {
-            "name": '计划产量',
+            "name": '上周产量',
             "type": 'bar',
             "data": [plane_output['星期一'], plane_output['星期二'], plane_output['星期三'],
                      plane_output['星期四'], plane_output['星期五'], plane_output['星期六'],

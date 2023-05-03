@@ -98,6 +98,48 @@ def get_week_data(str):
     return context
 
 
+def get_last_week_data(str):
+    """
+    :param str: str的值代表要获取的参数：3总产、4运行时间、5调试时间、6平均效率
+    :return:{"星期一": 188, "星期二": 0, "星期三": 0, "星期四": 0, "星期五": 0, "星期六": 0, "星期天": 0, "结果": "OK"}
+    """
+    try:
+        context = {}
+        b = []
+        #获取当前时间
+        t = datetime.datetime.now().strftime('%Y-%m-%d')
+        # 获取当前周时间
+        a = get_monday_to_sunday(today=t,weekly=-1)
+        sql = "select * from sky_robotstatus where YEARWEEK(date_format(c_time,'%Y-%m-%d'),1)=YEARWEEK(now(),7)-1"
+        cursor = connection.cursor()
+        cursor.execute(sql)
+        ret = cursor.fetchall()
+        ret = list(ret)
+        if len(ret) !=0:
+            for r in ret:
+                context[r[8]]=r[str]# r[8]获取数据中存储的日期字符串example'2023-04-08'
+                b.append(r[8])
+            out = list(set(a).difference(set(b)))
+            for o in out:
+                context[o]=0
+            # {'2023-04-08': 845, '2023-04-09': 2099, '2023-04-06': 0, '2023-04-04': 0, '2023-04-07': 0, '2023-04-03': 0, '2023-04-05': 0}
+            # [('2023-04-03', 0), ('2023-04-04', 0), ('2023-04-05', 0), ('2023-04-06', 0), ('2023-04-07', 0), ('2023-04-08', 845), ('2023-04-09', 2099)]
+            lst_sort = sorted(context.items(), key=lambda k: k[0])# 按照日期进行排序
+            context = {}
+            i = 0
+            for lst in lst_sort:
+                context[Week[i]] = lst[1]
+                i +=1
+        else:
+            for j in range(0,7):
+                context[Week[j]] = 0
+        context['结果'] = 'OK'
+    except Exception as e:
+        print(e)
+        context = {'结果':str(e)}
+    return context
+
+
 # 获取当月的总结数据
 def get_month_data(str):
     """
@@ -189,13 +231,14 @@ def get_lastweek_dg_data(str,name):
         #获取当前时间
         t = datetime.datetime.now().strftime('%Y-%m-%d')
         # 获取当前周时间
-        a = get_monday_to_sunday(today=t,weekly=0)
+        a = get_monday_to_sunday(today=t,weekly=-1)
         sql =  "select * from sky_dgstatus where YEARWEEK(date_format(c_time,'%%Y-%%m-%%d'),1)=YEARWEEK(now(),7)-1 " \
                     "and id in(select max(id)from sky_dgstatus where name='%s' group by time);"%(name)
         cursor = connection.cursor()
         cursor.execute(sql)
         ret = cursor.fetchall()
         ret = list(ret)
+        print(ret  )
         if len(ret) !=0:
             for r in ret:
                 context[r[7]]=r[str]# r[7]获取数据中存储的日期字符串example'2023-04-08'

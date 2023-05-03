@@ -1,13 +1,13 @@
 
 $(function(){
-    EqName = $('#eq_name').html();
-    console.log(name);
     initLine();
     initBar();
+    initPie();
     initStatus();
-    setInterval(initLine,60000);
-    setInterval(initBar,60000);
-    setInterval(initStatus,60000);
+    setInterval(initLine,1000);
+    setInterval(initBar,1000);
+    setInterval(initPie,1000);
+    setInterval(initStatus,2000);
 })
 
 function initBar(){
@@ -33,15 +33,50 @@ function initBar(){
     };
     // 获取数据
     $.ajax({
-        url:"/sky/dg/chart/self_op/",
-        type:"post",
-        data:{'name':EqName},
+        url:"/sky/robot/chart/bar/",
+        type:"get",
         dataType:"JSON",
         success:function(res){
             // 将后台返回的数据，更新到option中
             if(res.status){
                  option.legend.data = res.data.legend;
                  option.xAxis.data = res.data.x_axis;
+                 option.series = res.data.series_list;
+                // 使用刚指定的配置项和数据显示图表。
+                myChart.setOption(option);
+                window.addEventListener('resize', () => {
+                    myChart.resize()
+                });
+            }
+        }
+    });
+}
+function initPie(){
+    // 基于准备好的dom，初始化echarts实例
+    var myChart = echarts.init(document.getElementById('m3'));
+    // 指定图表的配置项和数据
+    var option = {
+      title: {
+        text: '运行效率',
+        subtext: '开机率',
+        left: 'center'
+      },
+      tooltip: {
+        trigger: 'item'
+      },
+      legend: {
+        bottom:0,
+      },
+      series: []
+    };
+        // 获取数据
+    $.ajax({
+        url:"/sky/robot/chart/pie/",
+        type:"get",
+        dataType:"JSON",
+        success:function(res){
+            // 将后台返回的数据，更新到option中
+            if(res.status){
                  option.series = res.data.series_list;
                 // 使用刚指定的配置项和数据显示图表。
                 myChart.setOption(option);
@@ -87,7 +122,7 @@ function initLine(){
                 label: {
                   formatter: function (params) {
                     return (
-                      '运行时间  ' +
+                      '运行率  ' +
                       params.value +
                       (params.seriesData.length ? '：' + params.seriesData[0].data : '')
                     );
@@ -112,7 +147,7 @@ function initLine(){
                 label: {
                   formatter: function (params) {
                     return (
-                      '停机时间 ' +
+                      '报警率 ' +
                       params.value +
                       (params.seriesData.length ? '：' + params.seriesData[0].data : '')
                     );
@@ -130,7 +165,7 @@ function initLine(){
   ],
           series: [
           {
-      name: '运行时间',
+      name: '运行率',
       type: 'line',
       smooth: true,
       emphasis: {
@@ -141,7 +176,7 @@ function initLine(){
       ]
     },
           {
-      name: '停机时间',
+      name: '报警率',
       type: 'line',
       xAxisIndex: 1,
       smooth: true,
@@ -155,9 +190,8 @@ function initLine(){
   ]
     };
     $.ajax({
-        url:"/sky/dg/chart/self_eff/",
-        type:"post",
-        data:{'name':EqName},
+        url:"/sky/robot/chart/line/",
+        type:"get",
         dataType:"JSON",
         success:function(res){
             // 将后台返回的数据，更新到option中
@@ -177,17 +211,20 @@ function initLine(){
 
 }
 function initStatus(){
-    $.post('/sky/dg/chart/self_sta/',{'name':EqName},function(data,status){
+    $.get('/sky/robot/status/',function(data,status){
 
         if(data.status){
             $('#eq_status').text(data.res_list.sys_status);
-            $('#eq_total_op').text(data.res_list.total_output);
-            $('#eq_order').text();
-            $('#eq_efficiency').text(data.res_list.efficiency);
-            $('#eq_output_now').text(data.res_list.op_everyday);
-            $('#eq_work_time').text(data.res_list.work);
-            $('#eq_efficiency_avg').text(data.res_list.efficiency_avg);
-            $('#eq_week').text(data.res_list.week_output);
+            $('#eq_work_status').text(data.res_list.work_status);
+            $('#eq_order').text(data.res_list.work_order);
+            $('#eq_error').text(data.res_list.work_error);
+            $('#eq_output_now').text(data.res_list.work_output);
+            $('#eq_output_total').text(data.res_list.total_output);
+            $('#eq_xspeed').text(data.res_list.x_speed);
+            $('#eq_yspeed').text(data.res_list.y_speed);
+            $('#eq_zspeed').text(data.res_list.z_speed);
+            $('#eq_cspeed').text(data.res_list.c_speed/100);
+            $('#eq_rspeed').text(data.res_list.r_speed/100);
         }else{
             console.log('接口错误')
         };

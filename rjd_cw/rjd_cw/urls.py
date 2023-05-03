@@ -19,9 +19,10 @@ from django.views.static import serve
 from django.conf import settings
 
 from app_cw.views import user, pretty, depart, admin, account, task, order, chart, upload, city, yc
+from sky.views import DongguanChart
 
 urlpatterns = [
-    # path('admin/', admin.site.urls),
+    path('', DongguanChart.dg_chart),
     # 配置媒体文件的路由地址
     re_path(r'^media/(?P<path>.*)$', serve, {'document_root': settings.MEDIA_ROOT}, name='media'),
 

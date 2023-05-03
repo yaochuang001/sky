@@ -33,7 +33,7 @@ def dg_chart_op(request):
     x_list = []
     data_list = []
     sql_op = "select name,op_everyday from sky_dgstatus where" \
-             " id in(select max(id) id from sky_dgstatus group by name order by name);"
+             " id in(select max(id) id from sky_dgstatus group by name)order by name;"
     cursor = connection.cursor()
     cursor.execute(sql_op)
     ret = cursor.fetchall()
@@ -66,7 +66,7 @@ def dg_chart_eff(request):
     x_list = []
     data_list = []
     sql_op = "select name,efficiency_avg from sky_dgstatus where" \
-             " id in(select max(id) id from sky_dgstatus group by name order by name);"
+             " id in(select max(id) id from sky_dgstatus group by name)order by name;"
     cursor = connection.cursor()
     cursor.execute(sql_op)
     ret = cursor.fetchall()
@@ -138,7 +138,6 @@ def dg_chart_kj(request):
 def dg_chart_self(request):
     """注塑机械手"""
     name = request.GET.get('name')
-    print(name)
     context = {
         "equipment": name
     }
@@ -248,5 +247,4 @@ def dg_chart_self_sta(request):
         "status": True,
         'res_list': res_list
     }
-    print(result)
     return JsonResponse(result)
