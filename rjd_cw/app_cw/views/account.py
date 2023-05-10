@@ -58,8 +58,10 @@ def login(request):
         # 网站生成随机字符串；写到用户浏览器的cookie中；再写入到session中：
         request.session["info"] = {'id': admin_object.id, 'name': admin_object.username}
         request.session.set_expiry(60 * 60 * 24 * 7)# 重新设置session超时时间
-
-        return redirect('/sky/dg/chart/')
+        if admin_object.username == 'Admin':
+            return redirect('/rjd/account/pub/list/')
+        else:
+            return redirect('/sky/dg/chart/')
     return render(request, 'login.html', {"form": form})
 
 

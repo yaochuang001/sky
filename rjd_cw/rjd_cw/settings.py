@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'app_cw',
     'sky',
+    'rjd',
 ]
 
 MIDDLEWARE = [
@@ -77,9 +78,11 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'gx_day16',
-        'USER': 'yc',
+        # 'USER': 'yc',
+        'USER': 'root',
         'PASSWORD': 'Yc422423',
-        'HOST': '120.78.196.43',
+        # 'HOST': '120.78.196.43',
+        'HOST': 'localhost',
         'PORT': 3306,
     }
 }
@@ -123,6 +126,7 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'pub_static'),
     os.path.join(BASE_DIR, 'app_cw', 'app_static'),
     os.path.join(BASE_DIR, 'sky', 'sky_static'),
+    os.path.join(BASE_DIR, 'rjd', 'rjd_static'),
 ]
 # 当设置为线上模式时候，用于提供服务器的静态资源路径
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')

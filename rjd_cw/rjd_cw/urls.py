@@ -90,6 +90,9 @@ urlpatterns = [
     # 指向skyApp应用的路由文件urls.py
     path('sky/', include(('sky.urls', 'sky'), namespace='sky')),
 
+    # 指向rjdApp应用的路由文件urls.py
+    path('rjd/', include(('rjd.urls', 'rjd'), namespace='rjd')),
+
     # 测试用
     path('yc/test/', yc.yc_test),
 ]
