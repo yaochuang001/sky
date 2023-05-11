@@ -3,7 +3,7 @@
 {% block content %}
 <div class="container">
     <div class="row">
-        <div class="col-sm-6">
+        <div class="col-sm-3">
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
@@ -20,20 +20,55 @@
                 </div>
             </div>
         </div>
-        <div class="col-sm-6">
+        <div class="col-sm-9">
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
                     新建、查询
                 </div>
                 <div class="panel-body">
-                    <div style="margin-bottom: 10px">
-                        <a class="btn btn-success" href="/rjd/account/pub/add/">
-                            <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
-                            新建对公账目
-                        </a>
-                    </div>
-                    <div tyle="margin-bottom: 10px">
+                    <a class="btn btn-success" href="/rjd/account/pub/add/">
+                        <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                        新建对公账目
+                    </a>
+                    <form style="display:inline" method="get">
+                        <select name="year">
+                            <option>{{ search_year }}</option>
+                            <option value="2022" style="color: violet;">2022年</option>
+                            <option value="2023" style="color: blue;">2023年</option>
+                            <option value="2024" style="color: black;">2024年</option>
+                            <option value="2025" style="color: green;">2025年</option>
+                            <option value="2026" style="color: red;">2026年</option>
+                            <option value="2027" style="color: red;">2027年</option>
+                            <option value="2028" style="color: red;">2028年</option>
+                            <option value="2029" style="color: red;">2029年</option>
+                            <option value="2030" style="color: red;">2030年</option>
+                            <option value="2031" style="color: red;">2031年</option>
+                            <option value="2032" style="color: red;">2032年</option>
+                            <option value="2033" style="color: red;">2033年</option>
+                        </select>
+                        <select name="month">
+                            <option>{{ search_month }}</option>
+                            <option value="1" style="color: red;">一月</option>
+                            <option value="2" style="color: red;">二月</option>
+                            <option value="3" style="color: red;">三月</option>
+                            <option value="4" style="color: red;">四月</option>
+                            <option value="5" style="color: red;">五月</option>
+                            <option value="6" style="color: red;">六月</option>
+                            <option value="7" style="color: red;">七月</option>
+                            <option value="8" style="color: red;">八月</option>
+                            <option value="9" style="color: red;">九月</option>
+                            <option value="10" style="color: red;">十月</option>
+                            <option value="11" style="color: red;">十一月</option>
+                            <option value="12" style="color: red;">十二月</option>
+                        </select>
+                        <button class="btn btn-default" type="submit">
+                            时间段查询
+                            <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+                        </button>
+
+                    </form>
+                    <div style="margin-top: 7px">
                         <form method="get">
                             <div class="row">
                                 <div class="col-sm-3">
@@ -53,6 +88,7 @@
                                 <div class="col-sm-3">
                                     <span class="input-group-btn">
                                         <button class="btn btn-default" type="submit">
+                                                时间段查询
                                                 <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
                                         </button>
                                     </span>
@@ -92,15 +128,14 @@
                 <tr>
                     <th scope="row">{{ obj.id }}</th>
                     <td>{{ obj.create_time|date:"Y-m-d" }}</td>
-                    <td>{{ obj.get_type_display }}</td>
-                    <td>{{ obj.supplier.supplier_name }}</td>
+                    <td>{{ obj.supplier }}</td>
                     <td>{{ obj.product_name }}</td>
                     <td>{{ obj.product_model }}</td>
                     <td>{{ obj.unit_price }}</td>
                     <td>{{ obj.total_price }}</td>
-                    <td>{{ obj.get_tax_display }}</td>
+                    <td>{{ obj.tax }}</td>
                     <td>{{ obj.bill }}</td>
-                     <td>
+                    <td>
                         <a class="btn btn-primary btn-xs" href="/rjd/account/pub/{{ obj.id }}/edit/">编辑</a>
                         <a class="btn btn-danger btn-xs" href="/rjd/account/pub/{{ obj.id }}/delete/">删除</a>
                     </td>

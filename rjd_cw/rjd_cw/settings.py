@@ -78,11 +78,11 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'gx_day16',
-        # 'USER': 'yc',
-        'USER': 'root',
+        'USER': 'yc',
+        # 'USER': 'root',
         'PASSWORD': 'Yc422423',
-        # 'HOST': '120.78.196.43',
-        'HOST': 'localhost',
+        'HOST': '120.78.196.43',
+        # 'HOST': 'localhost',
         'PORT': 3306,
     }
 }

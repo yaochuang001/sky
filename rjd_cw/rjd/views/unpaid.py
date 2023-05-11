@@ -3,38 +3,22 @@ from rjd.form.form import *
 from app_cw.utils.pagination import Pagination
 import datetime
 
+
 def unpaid_list(request):
     """未付表单"""
     now_time = datetime.datetime.now()
     data_dict = {}
     # 数据收集
     search_data = request.GET.get('q', "")
-    search_date = request.GET.get('d', '')
-    search_date2 = request.GET.get('d2', '')
-    if search_date:
-        start_date = datetime.date(*map(int, search_date.split('-')))
-    else:
-        start_date = ''
-    if search_date2:
-        end_date = datetime.date(*map(int, search_date2.split('-')))
-    else:
-        end_date = ''
     if search_data:
         data_dict["supplier__supplier_name__contains"] = search_data
-    if start_date and end_date:
-        queryset = models.Unpaid.objects.filter(**data_dict,
-                                                        create_time__range=(start_date, end_date)).order_by('-id')
-    else:
-        queryset = models.Unpaid.objects.filter(**data_dict,create_time__year=now_time.year,
-                                                        create_time__month=now_time.month).order_by('-id')
+    queryset = models.Unpaid.objects.filter(**data_dict).order_by('-id')
 
     page_object = Pagination(request, queryset)
     context = {
         'queryset': page_object.page_queryset,
         'search_data': search_data,
         'page_string': page_object.html(),
-        'search_date': search_date,
-        'search_date2': search_date2,
     }
     return render(request, 'unpaid_list.html', context)
 

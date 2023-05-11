@@ -19,13 +19,14 @@ urlpatterns = [
     path('account/pub/add/', account_pub.account_pub_add),
     path('account/pub/<int:nid>/edit/', account_pub.account_pub_edit),
     path('account/pub/<int:nid>/delete/', account_pub.account_pub_delete),
-    path('account_pub/multi/',account_pub.account_pub_multi),
+    path('account_pub/multi/', account_pub.account_pub_multi),
 
     # 对私账目表
     path('account/pri/list/', account_pri.account_pri_list),
     path('account/pri/add/', account_pri.account_pri_add),
     path('account/pri/<int:nid>/edit/', account_pri.account_pri_edit),
     path('account/pri/<int:nid>/delete/', account_pri.account_pri_delete),
+    path('account_pri/multi/', account_pri.account_pri_multi),
 
     # 未付款账目表
     path('unpaid/list/', unpaid.unpaid_list),

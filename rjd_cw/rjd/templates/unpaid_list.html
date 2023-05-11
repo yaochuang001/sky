@@ -27,39 +27,27 @@
                     新建、查询
                 </div>
                 <div class="panel-body">
-                    <div style="margin-bottom: 10px">
+                    <div style="margin-bottom:7px">
                         <a class="btn btn-success" href="/rjd/unpaid/add/">
                             <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
                             新建未付账目
                         </a>
                     </div>
-                    <div tyle="margin-bottom: 10px">
-                        <form method="get">
-                            <div class="row">
-                                <div class="col-sm-3">
-                                    <input type="text" name="q" class="form-control" placeholder="输入供应商"
-                                           value="{{ search_data }}">
-                                </div>
-                                <div class="col-sm-3">
-                                    <input id="rjd_date" type="text" name="d" class="form-control"
-                                           placeholder="起始日期" autocomplete="off"
-                                           value="{{ search_date }}">
-                                </div>
-                                <div class="col-sm-3">
-                                    <input id="rjd_date2" type="text" name="d2" class="form-control"
-                                           placeholder="截止日期" autocomplete="off"
-                                           value="{{ search_date2 }}">
-                                </div>
-                                <div class="col-sm-3">
+                    <form method="get" style="display:inline">
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <input type="text" name="q" class="form-control" placeholder="输入供应商"
+                                       value="{{ search_data }}">
+                            </div>
+                            <div class="col-sm-3">
                                     <span class="input-group-btn">
                                         <button class="btn btn-default" type="submit">
                                                 <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
                                         </button>
                                     </span>
-                                </div>
                             </div>
-                        </form>
-                    </div>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
@@ -93,15 +81,15 @@
                 <tr>
                     <th scope="row">{{ obj.id }}</th>
                     <td>{{ obj.create_time|date:"Y-m-d" }}</td>
-                    <td>{{ obj.supplier.supplier_name }}</td>
+                    <td>{{ obj.supplier }}</td>
                     <td>{{ obj.product_name }}</td>
                     <td>{{ obj.quantity }}</td>
                     <td>{{ obj.total_price }}</td>
                     <td>{{ obj.paid }}</td>
                     <td>{{ obj.final_payment }}</td>
-                    <td>{{ obj.get_tax_display }}</td>
+                    <td>{{ obj.tax }}</td>
                     <td>{{ obj.bill }}</td>
-                     <td>
+                    <td>
                         <a class="btn btn-primary btn-xs" href="/rjd/unpaid/{{ obj.id }}/edit/">编辑</a>
                         <a class="btn btn-danger btn-xs" href="/rjd/unpaid/{{ obj.id }}/delete/">删除</a>
                     </td>
