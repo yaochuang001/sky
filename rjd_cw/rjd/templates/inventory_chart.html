@@ -1,0 +1,114 @@
+{% extends 'rjd_layout.html' %}
+{% load static %}
+{% block content %}
+<div class="container">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
+            新建、查询
+        </div>
+        <div class="panel-body">
+            <a class="btn btn-success" href="/rjd/account/pri/add/">
+                <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                新建对私账目
+            </a>
+            <form style="display:inline" method="get" id="inventory_form">
+                <select name="year">
+                    <option>{{ search_year }}</option>
+                    <option value="2022" style="color: violet;">2022年</option>
+                    <option value="2023" style="color: blue;">2023年</option>
+                    <option value="2024" style="color: black;">2024年</option>
+                    <option value="2025" style="color: green;">2025年</option>
+                    <option value="2026" style="color: red;">2026年</option>
+                    <option value="2027" style="color: red;">2027年</option>
+                    <option value="2028" style="color: red;">2028年</option>
+                    <option value="2029" style="color: red;">2029年</option>
+                    <option value="2030" style="color: red;">2030年</option>
+                    <option value="2031" style="color: red;">2031年</option>
+                    <option value="2032" style="color: red;">2032年</option>
+                    <option value="2033" style="color: red;">2033年</option>
+                </select>
+                <button class="btn btn-default" type="submit" id="inventory_btn">
+                    时间段查询
+                    <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+                </button>
+            </form>
+
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-9">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <span class="glyphicon glyphicon-king" aria-hidden="true"></span>
+                    盘点数据
+                </div>
+                <div class="panel-body">
+                    <div id="m1" style="width:100%;height:450px;"></div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-3">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
+                    运行状态
+                </div>
+                <div class="panel-body">
+                    <div id="m2" style="width:100%;height:450px;">
+                        <table class="table table-hover">
+                            <thead>
+                            <tr>
+                                <th>名称</th>
+                                <th>信息</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <th>公司现金</th>
+                                <td>
+                                    <text id="rjd_cash"></text>
+                                    元
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>未付款</th>
+                                <td>
+                                    <text id="rjd_unpaid"></text>
+                                    元
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>未收款</th>
+                                <td>
+                                    <text id="final_payment"></text>
+                                    元
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>本年总花费</th>
+                                <td>
+                                    <text id="year_cost"></text>
+                                    元
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>上年总花费</th>
+                                <td>
+                                    <text id="last_year_cost"></text>
+                                    元
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block js %}
+<script src="{% static 'js/rjd_inventory_chart.js' %}"></script>
+{% endblock %}

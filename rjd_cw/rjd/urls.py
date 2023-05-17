@@ -1,5 +1,5 @@
 from django.urls import path
-from rjd.views import supplier, custom, account_pub, account_pri, unpaid, accounts_receivable
+from rjd.views import supplier, custom, account_pub, account_pri, unpaid, accounts_receivable, inventory
 
 urlpatterns = [
     # 供应商表
@@ -39,4 +39,9 @@ urlpatterns = [
     path('account/receivable/add/', accounts_receivable.account_receivable_add),
     path('account/receivable/<int:nid>/edit/', accounts_receivable.account_receivable_edit),
     path('account/receivable/<int:nid>/delete/', accounts_receivable.account_receivable_delete),
+
+    # 盘点
+    path('inventory/chart/', inventory.inventory_chart),
+    path('inventory/chart/bar/', inventory.inventory_chart_bar),
+    path('inventory/status/', inventory.inventory_status),
 ]

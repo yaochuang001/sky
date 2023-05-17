@@ -37,7 +37,7 @@
                 <li><a href="/rjd/account/pri/list/">对私表</a></li>
                 <li><a href="/rjd/unpaid/list/">未付表</a></li>
                 <li><a href="/rjd/account/receivable/list/">应收表</a></li>
-                <li><a href="/city/list/">盘账统计</a></li>
+                <li><a href="/rjd/inventory/chart/">盘账统计</a></li>
 
             </ul>
             <ul class="nav navbar-nav navbar-right">
@@ -66,6 +66,7 @@
 <script src="{% static 'plugins/bootstrap-3.4.1/js/bootstrap.min.js' %}"></script>
 <script src="{% static 'plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js' %}"></script>
 <script src="{% static 'plugins/bootstrap-datepicker/locales/bootstrap-datepicker.zh-CN.min.js' %}"></script>
+<script src="{% static 'js/echarts.min.js' %}"></script>
 <script>
     $(function(){
         $('#rjd_date').datepicker({

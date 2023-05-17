@@ -11,7 +11,7 @@ def unpaid_list(request):
     # 数据收集
     search_data = request.GET.get('q', "")
     if search_data:
-        data_dict["supplier__supplier_name__contains"] = search_data
+        data_dict["supplier__contains"] = search_data
     queryset = models.Unpaid.objects.filter(**data_dict).order_by('-id')
 
     page_object = Pagination(request, queryset)

@@ -22,7 +22,7 @@ from app_cw.views import user, pretty, depart, admin, account, task, order, char
 from sky.views import DongguanChart
 
 urlpatterns = [
-    path('', DongguanChart.dg_chart),
+    path('', yc.yc_admin),
     # 配置媒体文件的路由地址
     re_path(r'^media/(?P<path>.*)$', serve, {'document_root': settings.MEDIA_ROOT}, name='media'),
 

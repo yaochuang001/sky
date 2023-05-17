@@ -12,8 +12,7 @@ def account_receivable_list(request):
     search_data = request.GET.get('q', "")
     if search_data:
         data_dict["custom__company_name__contains"] = search_data
-    queryset = models.AccountsReceivable.objects.filter(**data_dict, create_time__year=now_time.year,
-                                                        create_time__month=now_time.month).order_by('-id')
+    queryset = models.AccountsReceivable.objects.filter(**data_dict).order_by('-id')
 
     page_object = Pagination(request, queryset)
     context = {
