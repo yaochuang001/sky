@@ -14,7 +14,7 @@ function initBar(){
     // 指定图表的配置项和数据
     var option = {
        title: {
-          text: '产量',
+          text: '月度产量-计划',
           textAlign:"auto",
           left:"center",
         },
@@ -61,8 +61,8 @@ function initPie(){
     // 指定图表的配置项和数据
     option = {
   title: {
-    text: 'Referer of a Website',
-    subtext: 'Fake Data',
+    text: '医用注塑设备',
+    subtext: 'Work Status',
     left: 'center'
   },
   tooltip: {
@@ -77,11 +77,10 @@ function initPie(){
       type: 'pie',
       radius: '50%',
       data: [
-        { value: 1048, name: 'Search Engine' },
-        { value: 735, name: 'Direct' },
-        { value: 580, name: 'Email' },
-        { value: 484, name: 'Union Ads' },
-        { value: 300, name: 'Video Ads' }
+        { value: 1048, name: '生产中' },
+        { value: 735, name: '调试中' },
+        { value: 284, name: '停机中' },
+        { value: 150, name: '计划停机' }
       ],
       emphasis: {
         itemStyle: {
@@ -147,7 +146,7 @@ function initLine(){
             }
           },
           // prettier-ignore
-          data: ['2016-1', '2016-2', '2016-3', '2016-4', '2016-5', '2016-6', '2016-7', '2016-8', '2016-9', '2016-10', '2016-11', '2016-12']
+          data: ['2023-1', '2023-2', '2023-3', '2023-4', '2023-5', '2023-6', '2023-7', '2023-8', '2023-9', '2023-10', '2023-11', '2023-12']
         },
         {
           type: 'category',
@@ -172,7 +171,7 @@ function initLine(){
             }
           },
           // prettier-ignore
-          data: ['2015-1', '2015-2', '2015-3', '2015-4', '2015-5', '2015-6', '2015-7', '2015-8', '2015-9', '2015-10', '2015-11', '2015-12']
+          data: ['2022-1', '2022-2', '2022-3', '2022-4', '2022-5', '2022-6', '2022-7', '2022-8', '2022-9', '2022-10', '2022-11', '2022-12']
         }
       ],
       yAxis: [
@@ -182,7 +181,7 @@ function initLine(){
       ],
       series: [
         {
-          name: 'Precipitation(2015)',
+          name: '完成度(2022)',
           type: 'line',
           xAxisIndex: 1,
           smooth: true,
@@ -190,18 +189,18 @@ function initLine(){
             focus: 'series'
           },
           data: [
-            2.6, 5.9, 9.0, 26.4, 28.7, 70.7, 175.6, 182.2, 48.7, 18.8, 6.0, 2.3
+            106.3, 105.3, 104.7, 94.8, 104.8, 95.4, 105.4, 107.2, 106.7, 110.2, 110.5, 102.3
           ]
         },
         {
-          name: 'Precipitation(2016)',
+          name: '完成度(2023)',
           type: 'line',
           smooth: true,
           emphasis: {
             focus: 'series'
           },
           data: [
-            3.9, 5.9, 11.1, 18.7, 48.3, 69.2, 231.6, 46.6, 55.4, 18.4, 10.3, 0.7
+            0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
           ]
         }
       ]

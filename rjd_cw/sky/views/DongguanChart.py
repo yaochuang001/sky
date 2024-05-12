@@ -24,6 +24,7 @@ def dg_chart(request):
     """
     context = {
         "queryset": queryset,
+        "time":'2022-10-11'
     }
     return render(request, 'dg_chart.html', context)
 
@@ -139,7 +140,9 @@ def dg_chart_self(request):
     """注塑机械手"""
     name = request.GET.get('name')
     context = {
-        "equipment": name
+        "equipment": name,
+        "name": name+':'+'180TJSW塑料注射成型机'
+
     }
 
     return render(request, 'dg_chart_self.html', context)
@@ -151,7 +154,7 @@ def dg_chart_self_op(request):
     name = request.POST.get('name')
     day_output = data_date.get_week_dg_data(4, name)
     day_eff = data_date.get_lastweek_dg_data(4, name)
-    legend = ['本周产量', '上周产量']
+    legend = ['本周产量', '计划产量']
     series_list = [
         {
             "name": '本周产量',
@@ -161,7 +164,7 @@ def dg_chart_self_op(request):
                      day_output['星期天'], ]
         },
         {
-            "name": '上周产量',
+            "name": '计划产量',
             "type": 'bar',
             "data": [day_eff['星期一'], day_eff['星期二'], day_eff['星期三'],
                      day_eff['星期四'], day_eff['星期五'], day_eff['星期六'],
@@ -210,6 +213,7 @@ def dg_chart_self_sta(request):
     """构造运行数据"""
     today = datetime.date.today()
     name = request.POST.get('name')
+    print(name)
     try:
         res = models.DgData.objects.filter(c_time__year=today.year, c_time__month=today.month,
                                            c_time__day=today.day, name=name).latest('id')
@@ -245,6 +249,8 @@ def dg_chart_self_sta(request):
         res_list['错误'] = str(e)
     result = {
         "status": True,
-        'res_list': res_list
+        'res_list': res_list,
+        'name':'121-180TJSW塑料注射成型机'
     }
+    print(res_list)
     return JsonResponse(result)

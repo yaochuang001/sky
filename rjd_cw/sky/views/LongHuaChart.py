@@ -31,6 +31,7 @@ def lh_chart(request):
     context = {
         "queryset": page_object.page_queryset,
         "page_string": page_object.html(),
+        "time":'2022-10-11',
     }
     return render(request, 'lh_chart.html', context)
 

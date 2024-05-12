@@ -16,7 +16,7 @@ function initBar(){
     // 指定图表的配置项和数据
     var option = {
         title: {
-          text: '周产量',
+          text: '产量-计划',
           textAlign:"auto",
           left:"center",
         },
@@ -36,6 +36,7 @@ function initBar(){
         url:"/sky/dg/chart/self_op/",
         type:"post",
         data:{'name':EqName},
+//        data:{'name':"121号"},
         dataType:"JSON",
         success:function(res){
             // 将后台返回的数据，更新到option中
